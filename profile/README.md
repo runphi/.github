@@ -24,4 +24,4 @@ We call this isolated container **Zero-Interference Containers** (ZICs).
 
 Why that? We envision an industrial cloud in which critical applications are seamlessly managed along with normal Linux containers, with the same flexibility. You can define the number of replicas and deploy them across a large cluster while keeping high standards of non-functional requirements. 
 
-runPHI is OCI compliant (at least, for basic calls like start, stop, kill, and delete). The runtime is still an academic research project. If you have any suggestions to improve it (or even better, you want to contribute!!!), please contact this [email](runphi.dessert.unina@gmail.com).
+runPHI is OCI compliant (at least, for basic calls like start, stop, kill, and delete). The runtime is still an academic research project. If you have any suggestions to improve it (or even better, you want to contribute!!!), please contact this [email](mailto:runphi.dessert.unina@gmail.com).
