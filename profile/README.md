@@ -1,7 +1,8 @@
-# runPHI
+# runPHI: A Container RUNtime for Partitioning Hypervisor Integration
 
+<p align="center">
 <img src="https://github.com/runphi/runphi_manager/blob/main/logo/runphi_logo_lowres.jpg" width="100">
-
+</p>
 ----
 
 #### Authors: Marco Barletta, Francesco Boccola, Daniele Ottaviano, Luigi De Simone & other members of DESSERT lab UniNa
