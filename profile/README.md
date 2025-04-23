@@ -5,7 +5,7 @@
 
 #### Authors
 
-Marco Barletta, Francesco Boccola, Daniele Ottaviano, Luigi De Simone & other members of [DESSERT group](https://dessert.unina.it) at [DIETI](www.dieti.unina.it), Università degli Studi di Napoli Federico II
+Marco Barletta, Francesco Boccola, Daniele Ottaviano, Luigi De Simone & other members of [DESSERT group](https://dessert.unina.it) at [DIETI](http://www.dieti.unina.it), Università degli Studi di Napoli Federico II
 
 ----
 
