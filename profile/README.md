@@ -3,25 +3,53 @@
   <h2>runPHI: A Container RUNtime for Partitioning Hypervisor Integration</h2>
 </p>
 
-**runPHI** is an OCI container runtime that runs containers as partitions of a
-hypervisor. A container runtime is the small program below containerd, Docker
-or the kubelet that sets up and starts a container; runPHI does the same with
-partitioning hypervisors, designed for industrial systems with real-time and
-safety requirements.
+**runPHI** is an OCI-compliant *meta-runtime* that orchestrates heterogeneous
+execution environments, from ordinary Linux containers to hardware-partitioned
+bare-metal guests, through the same standard container workflows (Docker,
+containerd, Kubernetes) across the cloud–edge continuum.
 
-With runPHI, a Zephyr, FreeRTOS, bare-metal or Linux workload running on
-industrial hardware (real-time processing units included) is deployed and
-managed by Docker or Kubernetes like any other container, while running
-isolated in its own partition: a **Zero-Interference Container** (ZIC).
-Images without a partition configuration go to `runc` as usual, so critical
-and ordinary containers share the same cluster and tools.
+Industrial applications (Industry 4.0/5.0) mix workloads of different
+criticality on the same nodes, and safety standards (ISO 26262, EN 50128,
+DO-178C) demand freedom from interference between them. Linux containers and
+microVMs share the host kernel, so they cannot guarantee it; partitioning
+hypervisors and separation kernels can, but they need board-specific
+configuration and manual integration, out of reach of cloud-native tools.
+
+runPHI closes this gap. It sits where `runc` sits, below the container
+manager's shim, and translates each OCI lifecycle command (`create`, `start`,
+`kill`, `delete`, `state`) into the actions and configuration of the chosen
+backend. Each isolation technology becomes a first-class OCI citizen, and the
+orchestrator deploys and manages them all as containers:
+
+- **Linux containers**, standard or real-time, for non-critical workloads (handed to `runc`);
+- **hypervisor-based containers**, virtual machines of a general-purpose
+  hypervisor (Xen, KVM), for mid-to-high isolation;
+- **partitioned containers (p-containers)**, an application with a minimal
+  runtime (an RTOS such as Zephyr or FreeRTOS, a libOS, or bare metal) on a
+  static partition of a partitioning hypervisor (Jailhouse), down to the
+  real-time processing units (RPUs) of the SoC, for the strictest real-time
+  and dependability requirements.
 
 <p align="center">
-  <img src="https://github.com/runphi/.github/blob/main/imgs/runphi_zic.png" width="50%">
+  <img src="https://github.com/runphi/.github/blob/main/imgs/runphi_overview.png" width="70%">
 </p>
 
-runPHI implements the basic OCI calls (`create`, `start`, `kill`, `delete`,
-`state`). It is an academic research project.
+Because the same application can be packaged for several backends and the
+image builder picks, at pull time, the variant each node can run, runPHI
+enables orchestration primitives that no single backend offers: **diverse
+replication**, with replicas of a service on different isolation
+technologies, and **cross-backend migration**, re-provisioning a failing or
+degraded workload on another backend. An environment builder assembles
+tested, reproducible combinations of toolchains, kernels, RTOSes and
+hypervisors for each platform.
+
+The direction of the project is a single cloud-native control plane for any
+execution environment an industrial node can offer, with the isolation level
+chosen per workload: more backends (KVM, other partitioning hypervisors,
+dual-kernel setups), more platforms (Arm and x86), and orchestration policies
+that use the diversity among them for resilience.
+
+runPHI is an academic research project.
 
 ## Repositories
 
